@@ -64,7 +64,7 @@ class Command
     public static function update()
     {
         Command::stop();
-        chdir('../tomori');
+        chdir(getenv('DIR') . '../tomori');
         exec('git pull', $out, $ret);
         chdir('../ayumi');
         exec('git pull', $out, $ret);
@@ -99,7 +99,7 @@ class Command
 
     public static function start()
     {
-        chdir('../tomori');
+        chdir(getenv('DIR') . '../tomori');
         exec('nohup php tomori.php > /dev/null 2>&1 &', $out, $ret);
         chdir('../ayumi');
         exec('nohup php ayumi.php > /dev/null 2>&1 &', $out, $ret);
