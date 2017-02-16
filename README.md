@@ -10,14 +10,11 @@
 # clone repository
 $ git clone https://github.com/koike/yusa.git
 
-# setup files
-$ composer install
-
 # write api key
 $ vi .env
 
-# register cron
-crontab cron.conf
+# setup files
+$ php install.php
 ```
 
 ## LICENSE
