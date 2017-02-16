@@ -7,7 +7,7 @@
 
 ## Install
 ```sh
-# clone repository
+# clone repository (in the same hierarchy as tomori and ayumi)
 $ git clone https://github.com/koike/yusa.git
 
 # write api key
