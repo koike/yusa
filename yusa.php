@@ -136,9 +136,9 @@ if($response['status'])
 
 if($order != null)
 {
-    if(file_exists('order.log'))
+    if(file_exists(getenv('DIR') . 'order.log'))
     {
-        $old = file_get_contents('order.log');
+        $old = file_get_contents(getenv('DIR') . 'order.log');
         if($order === $old)
         {
             exit(1);
@@ -159,5 +159,5 @@ if($order != null)
             break;
     }
 
-    file_put_contents('order.log', $order);
+    file_put_contents(getenv('DIR') . 'order.log', $order);
 }
