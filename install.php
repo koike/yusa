@@ -1,7 +1,6 @@
 <?php
 
-$composer = 'composer install';
-exec($composer, $arr, $ret);
+exec('composer install', $out, $ret);
 exec('echo "*/10 * * * * php ' . getcwd() . '/yusa.php" > cron.conf', $out, $ret);
 exec('crontab cron.conf', $out, $ret);
 exec('echo "DIR=' . getcwd() . '/" >> .env', $out, $ret);

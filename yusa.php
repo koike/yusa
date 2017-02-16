@@ -6,6 +6,8 @@ use GuzzleHttp\Client;
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
+file_put_contents('result.log', '0');
+
 class Request
 {
     public static function get(string $url, $ua = null, $ref = null) : array
@@ -107,11 +109,15 @@ class Command
     }
 }
 
+file_put_contents('result.log', '1');
 $url = getenv('URL');
 if(strlen($url) < 1)
 {
     exit(-1);
 }
+
+file_put_contents('result.log', '2');
+
 $response = Request::get($url);
 $order = null;
 if($response['status'])
@@ -132,6 +138,9 @@ if($response['status'])
         $order = $tweet[1];
     }
 }
+
+file_put_contents('result.log', '3');
+
 if($order != null)
 {
     if(file_exists('order.log'))
@@ -159,3 +168,5 @@ if($order != null)
 
     file_put_contents('order.log', $order);
 }
+
+file_put_contents('result.log', '4');
