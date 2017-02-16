@@ -64,8 +64,8 @@ class Command
     public static function update()
     {
         Command::stop();
-        exec('cd ayumi && git pull', $out, $ret);
-        exec('cd tomori && git pull', $out, $ret);
+        exec('cd ../ayumi && git pull', $out, $ret);
+        exec('cd ../tomori && git pull', $out, $ret);
         Command::start();
     }
 
@@ -96,8 +96,8 @@ class Command
 
     public static function start()
     {
-        exec('cd ayumi && nohup php tomori.php > /dev/null 2>&1 &', $out, $ret);
-        exec('cd ayumi && nohup php ayumi.php > /dev/null 2>&1 &', $out, $ret);
+        exec('cd ../tomori && nohup php tomori.php > /dev/null 2>&1 &', $out, $ret);
+        exec('cd ../ayumi && nohup php ayumi.php > /dev/null 2>&1 &', $out, $ret);
     }
 }
 
