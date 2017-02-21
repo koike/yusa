@@ -66,10 +66,43 @@ class Command
         Command::stop();
         chdir(getenv('DIR') . '../tomori');
         exec('git pull', $out, $ret);
-        chdir('../ayumi');
+        chdir(getenv('DIR') . '../ayumi');
         exec('git pull', $out, $ret);
-        chdir('../yusa');
+        chdir(getenv('DIR'));
         Command::start();
+    }
+
+    public static function status()
+    {
+        $tomori = $ayumi = false;
+        exec('ps aux | grep php', $out, $ret);
+        if(count($out) > 0)
+        {
+            
+            foreach($out as $line)
+            {
+                if(strpos($line, 'tomori') !== false)
+                {
+                    $tomori = true;
+                }
+                if(strpos($line, 'ayumi') !== false)
+                {
+                    $ayumi = true;
+                }
+            }
+        }
+        if(!$tomori)
+        {
+            chdir(getenv('DIR') . '../tomori');
+            exec('nohup php tomori.php > /dev/null 2>&1 &', $out, $ret);
+            chdir(getenv('DIR'));
+        }
+        if(!$ayumi)
+        {
+            chdir(getenv('DIR') . '../ayumi');
+            exec('nohup php ayumi.php > /dev/null 2>&1 &', $out, $ret);
+            chdir(getenv('DIR'));
+        }
     }
 
     public static function stop()
@@ -101,11 +134,14 @@ class Command
     {
         chdir(getenv('DIR') . '../tomori');
         exec('nohup php tomori.php > /dev/null 2>&1 &', $out, $ret);
-        chdir('../ayumi');
+        chdir(getenv('DIR') . '../ayumi');
         exec('nohup php ayumi.php > /dev/null 2>&1 &', $out, $ret);
-        chdir('../yusa');
+        chdir(getenv('DIR'));
     }
 }
+
+// Vital Check
+Command::status();
 
 $url = getenv('URL');
 if(strlen($url) < 1)
